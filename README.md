@@ -71,6 +71,7 @@ Initial MVP features will be those included in the first packaged (unlocked or m
     1. For Community
 1. Slack integration
 1. Quip Integration
+1. Support for Community Conferences as well
 1. Git Actions
     1. Create/Version diagrams when version released
 
