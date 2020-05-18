@@ -1,0 +1,19 @@
+minimum_cumulusci_version: '3.12.2'
+project:
+    name: trailblazer-community-group-package
+    package:
+        name:  trailblazer-community-group-package
+        api_version: '48.0'
+    source_format: sfdx
+
+tasks:
+    robot:
+        options:
+            suites: robot/trailblazer-community-group-package/tests
+            options:
+                outputdir: robot/trailblazer-community-group-package/results
+
+    robot_testdoc:
+        options:
+            path: robot/trailblazer-community-group-package/tests
+            output: robot/trailblazer-community-group-package/doc/trailblazer-community-group-package_tests.html

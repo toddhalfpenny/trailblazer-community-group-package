@@ -1,0 +1,148 @@
+@startuml
+
+' Hide the spot
+hide circle
+' Hide the stereotype
+hide stereotype
+
+' Avoid problems with angled crows feet
+skinparam linetype ortho
+
+skinparam roundcorner 8
+
+' Style standard objects differently
+skinparam class {
+    BackgroundColor<<standard>> LightBlue
+    BackgroundColor LightYellow
+    BackgroundColor<<junction>> LightGreen
+}
+
+
+title
+  Trailblazer Community Group App
+  ERD
+end title
+
+!define not_null(x) &#35; x
+!define custom(x) <b>x</b>
+
+
+' Objects
+entity "Account"<<standard>> {
+  --
+  custom(IFK) : text (255)
+  custom(TwitterHandle) : text (255)
+  custom(IsDeleted) : checkbox (default false)
+  custom(IsSponsor) : checkbox (default false)
+}
+
+entity "Contact"<<standard>> {
+  --
+  custom(IFK) : text (255)
+  custom(TwitterHandle) : text (255)
+  custom(LinkedInLink) : text (255)
+  custom(TrailblazerLink) : text (255)
+}
+
+entity "Event"<<standard>> {
+  --
+custom(CheckInCount) : number
+custom(IFK) : text (255)
+custom(Venue) : lookup (Venue)
+custom(PublicLink) : text (255)
+custom(PublicLinkShort) : text (255)
+custom(RSVPCount) : number
+custom(Status) : picklist - (Proposed | Date Confirmed | Published)
+custom(VenueStatus) : picklist - (Prospect | Working | Confirmed | Not needed - Virtual)
+custom(VirtualLink) : text (255)
+}
+
+entity "EventSponsor"<<junction>> {
+  --
+custom(Event) : m/d (Event)
+custom(IFK) : text (255)
+custom(Sponsor) : m/d (Account)
+custom(SponsorStatus) : picklist - (Prospect | Working | Confirmed)
+}
+
+entity "Presentation" {
+  --
+custom(Abstract) : text
+custom(Event) : lookup (Event)
+custom(IFK) : text (255)
+custom(RecordingLink) : text (255)
+custom(SlidesLink) : text (255)
+custom(Status) : picklist (Prospect | Ready for event | Confirmed)
+custom(Title) : text (255)
+}
+
+entity "PresentationSpeaker"<<junction>> {
+  --
+custom(IFK) : text (255)
+custom(Presentation) : m/d (Presentation)
+custom(Contact) : m/d (Contact)
+}
+
+entity "Prize" {
+  --
+custom(Event) : lookup (Event)
+custom(IFK) : text (255)
+custom(Description) : text (255)
+custom(Sponsor) : lookup (Account)
+custom(Status) : picklist (Available | Won | Delivered)
+custom(Winner) : text (255)
+}
+
+entity "Quiz)" as quiz {
+  --
+custom(Event) : lookup (Event)
+custom(IFK) : text (255)
+}
+note left
+  From Philippe
+  Ozil's app
+end note
+
+entity "Venue" {
+  --
+custom(Account) : lookup (Account)
+custom(Capacity) : number
+custom(Description) : text
+custom(IFK) : text (255)
+custom(City) : text (255)
+custom(Country) : text (255)
+custom(PostalCode) : text (255)
+custom(State) : text (255)
+custom(Street) : text (255)
+custom(Status) : picklist (Available | Unavailable)
+}
+
+' Relationships
+Account |o..o{ Contact
+
+Event }o..o| Venue
+Event ||..o{ EventSponsor
+
+EventSponsor }o..|| Account : Primary
+
+Presentation }o..o| Event
+Presentation ||..o{ PresentationSpeaker
+
+PresentationSpeaker }o..|| Contact : Primary
+
+Prize }o..o| Event
+Prize }o..|| Account
+
+quiz }o..o| Event
+
+
+Venue }o..|| Account
+
+
+legend
+Blue: standard
+Yellow: custom
+Green: junction
+end legend
+
+@enduml

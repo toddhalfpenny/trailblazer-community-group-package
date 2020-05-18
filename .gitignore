@@ -1,0 +1,26 @@
+# Salesforce / SFDX / CCI
+.cci
+.sfdx
+/src.orig
+/src
+
+# Prod data extract - not for github
+/data/export-live
+
+# Python
+*.pyc
+__pycache__
+
+# Robot Framework results
+robot/trailblazer-community-group-package/results/
+
+# Editors
+*.sublime-project
+*.sublime-workspace
+.vscode
+.idea
+.project
+.settings
+
+# Misc
+.DS_Store

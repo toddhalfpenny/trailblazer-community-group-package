@@ -1,0 +1,28 @@
+{
+    "objects" : [
+        {
+            "apiName": "Account",
+            "fields": [
+                "Name",
+                "Website",
+                "BillingCity",
+                "BillingCountry",
+                "BillingPostalCode",
+                "BillingState",
+                "BillingStreet"
+            ],
+            "ifkField" : "IFK__c"
+        },
+        {
+            "apiName": "Contact",
+            "fields": [
+                "FirstName",
+                "LastName",
+                "Email",
+                "MobilePhone",
+                "Description"
+            ],
+            "ifkField" : "IFK__c"
+        }
+    ]
+}
